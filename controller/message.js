@@ -40,7 +40,50 @@ async function add2(ctx, next) {
         }
     }
 }
+async function delall(ctx, next) {
+    let body = ctx.request.body
+    if (body._id && mongoose.Types.ObjectId.isValid(body._id)) {
+        let result = await database.message.deleteMany({ uid: body._id })
+        ctx.body = {
+            code: 200
+        }
+    } else {
+        ctx.body = {
+            code: 500
+        }
+    }
+}
+async function deldate(ctx, next) {
+    let body = ctx.request.body
+    if (body._id && mongoose.Types.ObjectId.isValid(body._id) && body.date) {
+        let result = await database.message.deleteMany({ uid: body._id ,date: body.date})
+        ctx.body = {
+            code: 200
+        }
+    } else {
+        ctx.body = {
+            code: 500
+        }
+    }
+}
+async function delsel(ctx, next) {
+    let body = ctx.request.body
+    if (body._id && mongoose.Types.ObjectId.isValid(body._id) && body.date && body.baht && body.text) {
+        let result = await database.message.deleteOne({ uid: body._id ,date: body.date,baht: body.baht,text: body.text})
+        ctx.body = {
+            code: 200
+        }
+    } else {
+        ctx.body = {
+            code: 500
+        }
+    }
+}
+
 
 module.exports.add1 = add1;
 module.exports.add2 = add2;
+module.exports.delall = delall;
+module.exports.deldate = deldate;
+module.exports.delsel = delsel;
 
