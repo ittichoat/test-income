@@ -1,10 +1,9 @@
 async function add1(ctx, next) {
     let body = ctx.request.body
     date = new Date().toISOString().slice(0, 10).toLocaleString('en-US', { timeZone: 'Asia/Bangkok' })
-    if (body.id && body.baht && body.text) {
-        console.log(date)
+    if ((body.users && mongoose.Types.ObjectId.isValid(body.users)) && body.baht && body.text) {
         let result = await database.message.create({
-            uid: body.id,
+            uid: body.users,
             date: date,
             baht: body.baht,
             text: body.text
@@ -22,10 +21,10 @@ async function add1(ctx, next) {
 }
 async function add2(ctx, next) {
     let body = ctx.request.body
-    if (body.id && body.baht && body.text && body.date) {
+    if ((body.users && mongoose.Types.ObjectId.isValid(body.users)) && body.baht && body.text && body.date) {
         console.log(date)
         let result = await database.message.create({
-            uid: body.id,
+            uid: body.users,
             date: body.date,
             baht: body.baht,
             text: body.text
@@ -41,6 +40,7 @@ async function add2(ctx, next) {
         }
     }
 }
+
 module.exports.add1 = add1;
 module.exports.add2 = add2;
 
