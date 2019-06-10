@@ -37,7 +37,7 @@ function chk(message) {
             if (numbers.test(slicemes)) {//ตรวจสอบว่าใช่ตัวเลขหรือไม่
                 console.log(message.slice(n + 1))
                 console.log(slicemes)
-                myModule.add("U2601a823f94494a66edaba4a08aa08d9",slicemes,message.slice(n + 1))
+                myModule.add1("U2601a823f94494a66edaba4a08aa08d9",slicemes,message.slice(n + 1))
             }
             else {
                 console.log('error')
@@ -56,9 +56,10 @@ function chk(message) {
                     var slicemes = messagenotdate.slice(1, parseInt(n))//ตัดข้อมความ
                     var numbers = /^[0-9]+$/
                     if (numbers.test(slicemes)) {//ตรวจสอบว่าใช่ตัวเลขหรือไม่
-                        console.log(message.slice(0, 10))
-                        console.log(messagenotdate.slice(n + 1))
-                        console.log(slicemes)
+                        console.log(message.slice(0, 10))//วันที่
+                        console.log(messagenotdate.slice(n + 1))//ข้อความ
+                        console.log(slicemes)//บาท
+                        myModule.add2("U2601a823f94494a66edaba4a08aa08d9",slicemes,message.slice(n + 1),message.slice(0, 10))
                     }
                     else {
                         console.log('error')

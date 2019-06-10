@@ -1,16 +1,46 @@
-async function add(id, baht, text) {
+async function add1(ctx, next) {
+    let body = ctx.request.body
     date = new Date().toISOString().slice(0, 10).toLocaleString('en-US', { timeZone: 'Asia/Bangkok' })
-    if (id && baht && text) {
+    if (body.id && body.baht && body.text) {
         console.log(date)
         let result = await database.message.create({
-            uid: id,
+            uid: body.id,
             date: date,
-            baht: baht,
-            text: text
+            baht: body.baht,
+            text: body.text
         })
-    } else {
-        
+        ctx.body = {
+            code: 200,
+            data: result
+        }
+    }
+    else {
+        ctx.body = {
+            code: 500,
+        }
     }
 }
-module.exports.add = add;
+async function add2(ctx, next) {
+    let body = ctx.request.body
+    if (body.id && body.baht && body.text && body.date) {
+        console.log(date)
+        let result = await database.message.create({
+            uid: body.id,
+            date: body.date,
+            baht: body.baht,
+            text: body.text
+        })
+        ctx.body = {
+            code: 200,
+            data: result
+        }
+    }
+    else {
+        ctx.body = {
+            code: 500,
+        }
+    }
+}
+module.exports.add1 = add1;
+module.exports.add2 = add2;
 
