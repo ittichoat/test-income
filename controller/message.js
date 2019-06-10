@@ -22,7 +22,6 @@ async function add1(ctx, next) {
 async function add2(ctx, next) {
     let body = ctx.request.body
     if ((body.users && mongoose.Types.ObjectId.isValid(body.users)) && body.baht && body.text && body.date) {
-        console.log(date)
         let result = await database.message.create({
             uid: body.users,
             date: body.date,
