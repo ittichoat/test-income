@@ -2,9 +2,26 @@ async function get(ctx, next) {
     let body = ctx.request.body
     if (body.id) {
         let result = await database.users.findOne({ id: body.id })
+        let resultmess = await database.message.find({ uid: result._id },{_id: 0}).select('date').sort({ date: 1 })
+        let array = []
+        for(x in resultmess){
+            array[x] = resultmess[x].date.toISOString().slice(0, 10)
+        }
+        let unique = [...new Set(array)]
+        let sum = 0
+        let sumday = 0
+        for (let x in unique) {
+            let bahtmess = await database.message.find({ date: unique[x] })
+            for (let y in bahtmess) {
+                sumday += bahtmess[y].baht
+                sum += bahtmess[y].baht
+            }
+            console.log(unique[x] + " = " + sumday)
+            sumday = 0
+        }
+        console.log("เงินรวมทั้งหมด = " + sum)
         ctx.body = {
             code: 200,
-            data: result._id
         }
     }
     else {
