@@ -29,5 +29,5 @@ async function remove(ctx, next) {
     }
 }
 
-module.exports.create = create;
-module.exports.remove = remove;
+module.exports.create = create
+module.exports.remove = remove

@@ -24,6 +24,7 @@ database = require('./models/database')
 
 controller_users = require('./controller/users')
 controller_message = require('./controller/message')
+controller_show = require('./controller/show')
 
 const config = require('./config')
 const routes = require('./routes')

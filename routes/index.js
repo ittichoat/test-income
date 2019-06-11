@@ -16,5 +16,9 @@ module.exports =  (router) => {
 
   //users
   router.post('/api/users/create', controller_users.create),
-  router.post('/api/users/remove', controller_users.remove)
+  router.post('/api/users/remove', controller_users.remove),
+
+  //show
+  router.get('/api/show/showall', controller_show.showall)
+  router.get('/api/show/showdate', controller_show.showdate)
 }

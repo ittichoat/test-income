@@ -1,29 +1,9 @@
 async function get(ctx, next) {
     let body = ctx.request.body
-    if (body.id) {
+    if(body.id && body.date){
         let result = await database.users.findOne({ id: body.id })
-        let resultmess = await database.message.find({ uid: result._id }, { _id: 0 }).select('date').sort({ date: 1 })
-        let array = []
-        let show = ''
-        for (x in resultmess) {
-            array[x] = resultmess[x].date.toISOString().slice(0, 10)
-        }
-        let unique = [...new Set(array)]
-        let sum = 0, sumdate = 0
-        for (let x in unique) {
-            let bahtmess = await database.message.find({ date: unique[x] })
-            for (let y in bahtmess) {
-                sumdate += bahtmess[y].baht
-                sum += bahtmess[y].baht
-            }
-            show += unique[x] + " = " + sumdate + "\n"
-            sumdate = 0
-        }
-        show += "เงินรวมทั้งหมด = " + sum
-        console.log(show)
-        ctx.body = {
-            code: 200
-        }
+        let resultmess = await database.message.find({ uid: result._id ,date : body.date}, { _id: 0 }).select('date').sort({ date: 1 })
+        console.log(resultmess)
     }
     else {
         ctx.body = {
@@ -128,10 +108,10 @@ async function delsel(ctx, next) {
     }
 }
 
-module.exports.get = get;
-module.exports.add1 = add1;
-module.exports.add2 = add2;
-module.exports.delall = delall;
-module.exports.deldate = deldate;
-module.exports.delsel = delsel;
+module.exports.get = get
+module.exports.add1 = add1
+module.exports.add2 = add2
+module.exports.delall = delall
+module.exports.deldate = deldate
+module.exports.delsel = delsel
 
