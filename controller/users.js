@@ -1,31 +1,27 @@
-async function create(ctx, next) {
-    let body = ctx.request.body
-    if (body.id) {
-        let result = await database.users.create({
-            id: body.id,
+async function create(id) {
+    if (id) {
+        await database.users.create({
+            id: id,
         })
-        ctx.body = {
-            code: 200,
-            data: result
+        console.log('OK')
+    }
+    else {
+        console.log('error')
+    }
+}
+async function remove(id) {
+    if (id) {
+        let _id = await database.users.findOne(id)
+        if (id && mongoose.Types.ObjectId.isValid(_id)) {
+            await database.users.deleteOne({ _id: _id })
+            console.log('OK')
+        }
+        else {
+            console.log('error')
         }
     }
     else {
-        ctx.body = {
-            code: 500,
-        }
-    }
-}
-async function remove(ctx, next) {
-    let body = ctx.request.body
-    if (body._id && mongoose.Types.ObjectId.isValid(body._id)) {
-        let result = await database.score.deleteOne({ _id: body._id })
-        ctx.body = {
-            code: 200
-        }
-    } else {
-        ctx.body = {
-            code: 500
-        }
+        console.log('error')
     }
 }
 

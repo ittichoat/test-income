@@ -1,114 +1,75 @@
-async function get(ctx, next) {
-    let body = ctx.request.body
-    if(body.id && body.date){
-        let result = await database.users.findOne({ id: body.id })
-        let resultmess = await database.message.find({ uid: result._id ,date : body.date}, { _id: 0 }).select('date').sort({ date: 1 })
-        console.log(resultmess)
-    }
-    else {
-        ctx.body = {
-            code: 500
-        }
-    }
-}
-async function add1(ctx, next) {
-    let body = ctx.request.body
-    date = new Date().toISOString().slice(0, 10).toLocaleString('en-US', { timeZone: 'Asia/Bangkok' })
-    if (body.id && body.baht && body.text) {
-        let userid = await database.users.findOne({ id: body.id })
+var Module_show = require('./show');
+async function add1(id, baht, text) {
+    if (id && baht && text) {
+        date = new Date().toISOString().slice(0, 10).toLocaleString('en-US', { timeZone: 'Asia/Bangkok' })
+        let userid = await database.users.findOne({ id: id })
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
-            let result = await database.message.create({
+            await database.message.create({
                 uid: userid._id,
                 date: date,
-                baht: body.baht,
-                text: body.text
+                baht: baht,
+                text: text
             })
-            ctx.body = {
-                code: 200,
-                data: result
-            }
         }
-
+        Module_show.showdate(id, date)
+        console.log('OK')
     }
     else {
-        ctx.body = {
-            code: 500,
-        }
+        console.log('error')
     }
 }
-async function add2(ctx, next) {
-    let body = ctx.request.body
-    if (body.id && body.baht && body.text && body.date) {
-        let userid = await database.users.findOne({ id: body.id })
+async function add2(id, baht, text, date) {
+    if (id && baht && text && date) {
+        let userid = await database.users.findOne({ id: id })
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
-            let result = await database.message.create({
+            await database.message.create({
                 uid: userid._id,
-                date: body.date,
-                baht: body.baht,
-                text: body.text
+                date: date,
+                baht: baht,
+                text: text
             })
-            ctx.body = {
-                code: 200,
-                data: result
-            }
+            Module_show.showdate(id, date)
+            console.log('OK')
         }
     }
     else {
-        ctx.body = {
-            code: 500,
-        }
+        console.log('error')
     }
 }
-async function delall(ctx, next) {
-    let body = ctx.request.body
-    if (body.id) {
-        let userid = await database.users.findOne({ id: body.id })
+async function delall(id) {
+    if (id) {
+        let userid = await database.users.findOne({ id: id })
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
-            let result = await database.message.deleteMany({ uid: userid._id })
-            ctx.body = {
-                code: 200
-            }
+            await database.message.deleteMany({ uid: userid._id })
+            console.log('OK')
         }
     } else {
-        ctx.body = {
-            code: 500
-        }
+        console.log('error')
     }
 }
-async function deldate(ctx, next) {
-    let body = ctx.request.body
-    if (body.id && body.date) {
-        let userid = await database.users.findOne({ id: body.id })
+async function deldate(id, date) {
+    if (id && date) {
+        let userid = await database.users.findOne({ id: id })
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
-            let result = await database.message.deleteMany({ uid: userid._id, date: body.date })
-            ctx.body = {
-                code: 200
-            }
+            await database.message.deleteMany({ uid: userid._id, date: date })
+            console.log('OK')
         }
     } else {
-        ctx.body = {
-            code: 500
-        }
+        console.log('error')
     }
 }
-async function delsel(ctx, next) {
-    let body = ctx.request.body
-    if (body.id && body.date && body.baht && body.text) {
-        let userid = await database.users.findOne({ id: body.id })
+async function delsel(id, baht, text, date) {
+    if (id && date && baht && text) {
+        let userid = await database.users.findOne({ id: id })
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
-            let result = await database.message.deleteOne({ uid: userid._id, date: body.date, baht: body.baht, text: body.text })
-            ctx.body = {
-                code: 200
-            }
+            await database.message.deleteOne({ uid: userid._id, date: date, baht: baht, text: text })
+            console.log('OK')
         }
     } else {
-        ctx.body = {
-            code: 500
-        }
+        console.log('error')
     }
 }
 
-module.exports.get = get
 module.exports.add1 = add1
 module.exports.add2 = add2
 module.exports.delall = delall

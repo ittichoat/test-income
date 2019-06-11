@@ -7,7 +7,6 @@ module.exports =  (router) => {
     await ctx.render('welcome', {title: ctx.state});
   }),
   //message
-  router.get('/api/message/get', controller_message.get),
   router.post('/api/message/add1', controller_message.add1),
   router.post('/api/message/add2', controller_message.add2),
   router.post('/api/message/delall', controller_message.delall),

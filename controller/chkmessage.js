@@ -1,4 +1,5 @@
-var myModule = require('./message');
+var Module_message = require('./message');
+var Module_show = require('./show');
 
 function chkdate(pastdate) {
     date = new Date().toISOString().slice(0, 10).toLocaleString('en-US', { timeZone: 'Asia/Bangkok' })
@@ -28,7 +29,7 @@ function chkdate(pastdate) {
     }
     return true;
 }
-function chk(message) {
+function chk(id, message) {
     if (message[0] == '-' || message[0] == '+' && message.match(/#/g) != null) {//เงิน#หมายเหตุ
         if ((message.match(/#/g)).length == 1) {//จำนวน #
             var n = message.search(/#/i);//ตำแหน่ง #
@@ -37,7 +38,7 @@ function chk(message) {
             if (numbers.test(slicemes)) {//ตรวจสอบว่าใช่ตัวเลขหรือไม่
                 console.log(message.slice(n + 1))
                 console.log(slicemes)
-                myModule.add1("U2601a823f94494a66edaba4a08aa08d9",slicemes,message.slice(n + 1))
+                Module_message.add1(id, slicemes, message.slice(n + 1))
             }
             else {
                 console.log('error')
@@ -59,7 +60,7 @@ function chk(message) {
                         console.log(message.slice(0, 10))//วันที่
                         console.log(messagenotdate.slice(n + 1))//ข้อความ
                         console.log(slicemes)//บาท
-                        myModule.add2("U2601a823f94494a66edaba4a08aa08d9",slicemes,message.slice(n + 1),message.slice(0, 10))
+                        Module_message.add2(id, slicemes, messagenotdate.slice(n + 1), message.slice(0, 10))
                     }
                     else {
                         console.log('error')
@@ -73,6 +74,7 @@ function chk(message) {
     }
     else if (message.search("delete") == 0) {
         if (message == "delete all") {
+            Module_message.delall(id)
             console.log(message)
         }
         else if (chkdate(message.slice(7, 17)) && message.match(/#/g) != null) {
@@ -83,9 +85,10 @@ function chk(message) {
                     var slicemes = messagenotdate.slice(1, parseInt(n))//ตัดข้อมความ
                     var numbers = /^[0-9]+$/
                     if (numbers.test(slicemes)) {//ตรวจสอบว่าใช่ตัวเลขหรือไม่
-                        console.log(message.slice(7, 17))
-                        console.log(messagenotdate.slice(n + 1))
-                        console.log(slicemes)
+                        console.log(message.slice(7, 17))//วันที่
+                        console.log(messagenotdate.slice(n + 1))//ข้อความ
+                        console.log(slicemes)//บาท
+                        Module_message.delsel(id, slicemes, messagenotdate.slice(n + 1), message.slice(7, 17))
                     }
                     else {
                         console.log('error')
@@ -99,19 +102,20 @@ function chk(message) {
         }
         else if (chkdate(message.slice(7, 17))) {
             console.log(message.slice(7, 17))
+            Module_message.delsel(id, message.slice(7, 17))
         }
         else {
             console.log('error')
         }
     }
-    else if(message.search("show") == 0){
-        if(message == "show all"){
+    else if (message.search("show") == 0) {
+        if (message == "show all") {
             console.log('OK')
+            Module_show.showall(id)
         }
-        else if(chkdate(message.slice(5, 15))){
+        else if (chkdate(message.slice(5, 15))) {
             console.log(message.slice(5, 15))
+            Module_show.showdate(id, message.slice(5, 15))
         }
     }
 }
-
-chk("+500#sad")
