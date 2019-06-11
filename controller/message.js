@@ -1,6 +1,7 @@
 var Module_show = require('./show');
 async function add1(id, baht, text) {
     if (id && baht && text) {
+        console.log(id + '\n' + baht + '\n' + text)
         date = new Date().toISOString().slice(0, 10).toLocaleString('en-US', { timeZone: 'Asia/Bangkok' })
         let userid = await database.users.findOne({ id: id })
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
@@ -20,6 +21,7 @@ async function add1(id, baht, text) {
 }
 async function add2(id, baht, text, date) {
     if (id && baht && text && date) {
+        console.log(id + '\n' + baht + '\n' + text + '\n' + date)
         let userid = await database.users.findOne({ id: id })
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
             await database.message.create({
@@ -38,6 +40,7 @@ async function add2(id, baht, text, date) {
 }
 async function delall(id) {
     if (id) {
+        console.log(id)
         let userid = await database.users.findOne({ id: id })
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
             await database.message.deleteMany({ uid: userid._id })
@@ -49,6 +52,7 @@ async function delall(id) {
 }
 async function deldate(id, date) {
     if (id && date) {
+        console.log(id + '\n' + date)
         let userid = await database.users.findOne({ id: id })
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
             await database.message.deleteMany({ uid: userid._id, date: date })
@@ -60,6 +64,7 @@ async function deldate(id, date) {
 }
 async function delsel(id, baht, text, date) {
     if (id && date && baht && text) {
+        console.log(id + '\n' + baht + '\n' + text)
         let userid = await database.users.findOne({ id: id })
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
             await database.message.deleteOne({ uid: userid._id, date: date, baht: baht, text: text })

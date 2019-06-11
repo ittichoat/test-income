@@ -102,7 +102,7 @@ function chk(id, message) {
         }
         else if (chkdate(message.slice(7, 17))) {
             console.log(message.slice(7, 17))
-            Module_message.delsel(id, message.slice(7, 17))
+            Module_message.deldate(id, message.slice(7, 17))
         }
         else {
             console.log('error')
@@ -119,3 +119,10 @@ function chk(id, message) {
         }
     }
 }
+
+//chk("U2601a823f94494a66edaba4a08aa08d9","+5000#เงินเดือน")
+//chk("U2601a823f94494a66edaba4a08aa08d9","2018-09-03#+5000#เงินเดือน")
+//chk("U2601a823f94494a66edaba4a08aa08d9","delete all")
+//chk("U2601a823f94494a66edaba4a08aa08d9","delete 2018-02-03")
+//chk("U2601a823f94494a66edaba4a08aa08d9","delete 2018-02-03#+500#asfaf")
+module.exports.chk = chk
