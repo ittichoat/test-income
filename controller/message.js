@@ -2,31 +2,32 @@ async function get(ctx, next) {
     let body = ctx.request.body
     if (body.id) {
         let result = await database.users.findOne({ id: body.id })
-        let resultmess = await database.message.find({ uid: result._id },{_id: 0}).select('date').sort({ date: 1 })
+        let resultmess = await database.message.find({ uid: result._id }, { _id: 0 }).select('date').sort({ date: 1 })
         let array = []
-        for(x in resultmess){
+        let show = ''
+        for (x in resultmess) {
             array[x] = resultmess[x].date.toISOString().slice(0, 10)
         }
         let unique = [...new Set(array)]
-        let sum = 0
-        let sumday = 0
+        let sum = 0, sumdate = 0
         for (let x in unique) {
             let bahtmess = await database.message.find({ date: unique[x] })
             for (let y in bahtmess) {
-                sumday += bahtmess[y].baht
+                sumdate += bahtmess[y].baht
                 sum += bahtmess[y].baht
             }
-            console.log(unique[x] + " = " + sumday)
-            sumday = 0
+            show += unique[x] + " = " + sumdate + "\n"
+            sumdate = 0
         }
-        console.log("เงินรวมทั้งหมด = " + sum)
+        show += "เงินรวมทั้งหมด = " + sum
+        console.log(show)
         ctx.body = {
-            code: 200,
+            code: 200
         }
     }
     else {
         ctx.body = {
-            code: 500,
+            code: 500
         }
     }
 }
