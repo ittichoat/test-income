@@ -45,7 +45,7 @@ async function showdate(id, date) {
                 }
                 sum += resultmess[x].baht
             }
-            show += textincome + textcost + 'เงินรวมทั้งหมดของวัน = ' + sum + '.-'
+            show += textincome + 'เงินรวมรายรับทั้งหมด = ' + income + ' .- \n\n' + textcost + 'เงินรวมรายจ่ายทั้งหมด = ' + cost + ' .- \n\n' + 'เงินรวมทั้งหมดของวัน = ' + sum + '.-'
             console.log(show)
         }
         else {
