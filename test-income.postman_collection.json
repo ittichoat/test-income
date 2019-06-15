@@ -21,8 +21,8 @@
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "_id",
-							"value": "5cfeb74123f9e738c4a4c527",
+							"key": "id",
+							"value": "U2601a823f94494a66edaba4a08aa08d9",
 							"type": "text"
 						}
 					]
@@ -50,19 +50,26 @@
 				"header": [
 					{
 						"key": "id",
-						"value": "123",
+						"value": "U2601a823f94494a66edaba4a08aa08d9",
 						"type": "text"
 					},
 					{
-						"key": "name",
-						"value": "seng",
+						"key": "baht",
+						"value": "5000",
+						"type": "text"
+					},
+					{
+						"key": "text",
+						"name": "Content-Type",
+						"value": "เงินเดือน",
 						"type": "text"
 					},
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
 						"value": "application/x-www-form-urlencoded",
-						"type": "text"
+						"type": "text",
+						"disabled": true
 					}
 				],
 				"body": {
@@ -70,17 +77,17 @@
 					"urlencoded": [
 						{
 							"key": "baht",
-							"value": "1000",
+							"value": "-1000",
 							"type": "text"
 						},
 						{
 							"key": "text",
-							"value": "fssssss",
+							"value": "ghfghfssssffsfsdfdfgfdg",
 							"type": "text"
 						},
 						{
-							"key": "users",
-							"value": "5cfeb74123f9e738c4a4c527",
+							"key": "id",
+							"value": "U2601a823f94494a66edaba4a08aa08d9",
 							"type": "text"
 						}
 					]
@@ -100,11 +107,16 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "123",
+							"value": "U2601a823f94494a66edaba4a08aa08d9",
 							"disabled": true
 						},
 						{
-							"key": "name",
+							"key": "baht",
+							"value": "5000",
+							"disabled": true
+						},
+						{
+							"key": "text",
 							"value": "seng",
 							"disabled": true
 						}
@@ -129,23 +141,23 @@
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "users",
-							"value": "5cfeb74123f9e738c4a4c527",
+							"key": "id",
+							"value": "U2601a823f94494a66edaba4a08aa08d9",
 							"type": "text"
 						},
 						{
 							"key": "baht",
-							"value": "500",
+							"value": "-500",
 							"type": "text"
 						},
 						{
 							"key": "date",
-							"value": "2018-07-03",
+							"value": "2018-07-05",
 							"type": "text"
 						},
 						{
 							"key": "text",
-							"value": "fghdhd",
+							"value": "fghdhdsdfsdggsdf",
 							"type": "text"
 						}
 					]
@@ -225,8 +237,8 @@
 							"type": "text"
 						},
 						{
-							"key": "_id",
-							"value": "5cfeb74123f9e738c4a4c527",
+							"key": "id",
+							"value": "U2601a823f94494a66edaba4a08aa08d9",
 							"type": "text"
 						}
 					]
@@ -263,8 +275,8 @@
 					"mode": "urlencoded",
 					"urlencoded": [
 						{
-							"key": "_id",
-							"value": "5cfeb74123f9e738c4a4c527",
+							"key": "id",
+							"value": "U2601a823f94494a66edaba4a08aa08d9",
 							"type": "text"
 						},
 						{
@@ -317,6 +329,93 @@
 							"value": "fssssss",
 							"disabled": true
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/show/showall",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "U2601a823f94494a66edaba4a08aa08d9",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/show/showall",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"show",
+						"showall"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/api/show/showdate",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "U2601a823f94494a66edaba4a08aa08d9",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "2019-06-11",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/show/showdate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"show",
+						"showdate"
 					]
 				}
 			},
