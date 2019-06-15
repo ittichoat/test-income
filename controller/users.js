@@ -12,7 +12,7 @@ async function create(id) {
 async function remove(id) {
     if (id) {
         let _id = await database.users.findOne(id)
-        if (id && mongoose.Types.ObjectId.isValid(_id)) {
+        if (_id && mongoose.Types.ObjectId.isValid(_id)) {
             await database.users.deleteOne({ _id: _id })
             console.log('OK')
         }
