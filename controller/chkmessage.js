@@ -118,6 +118,9 @@ function chk(id, message) {
             Module_show.showdate(id, message.slice(5, 15))
         }
     }
+    else if(message == "help"){
+        Module_show.showhelp()
+    }
 }
 
 //chk("U2601a823f94494a66edaba4a08aa08d9","+5000#เงินเดือน")
@@ -125,4 +128,7 @@ function chk(id, message) {
 //chk("U2601a823f94494a66edaba4a08aa08d9","delete all")
 //chk("U2601a823f94494a66edaba4a08aa08d9","delete 2018-02-03")
 //chk("U2601a823f94494a66edaba4a08aa08d9","delete 2018-02-03#+500#asfaf")
+//chk("U2601a823f94494a66edaba4a08aa08d9","show all")
+//chk("U2601a823f94494a66edaba4a08aa08d9","show 2018-02-03")
+//chk("U2601a823f94494a66edaba4a08aa08d9","help")
 module.exports.chk = chk
