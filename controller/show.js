@@ -1,5 +1,6 @@
 async function showall(id) {
     if (id) {
+        console.log(id)
         let result = await database.users.findOne({ id: id })
         let resultmess = await database.message.find({ uid: result._id }, { _id: 0 }).select('date').sort({ date: 1 })
         let array = []
@@ -27,6 +28,7 @@ async function showall(id) {
 }
 async function showdate(id, date) {
     if (id && date) {
+        console.log(id+" "+ date)
         let result = await database.users.findOne({ id: id })
         let resultmess = await database.message.find({ uid: result._id, date: date }, { _id: 0 }).select('date baht text').sort({ date: 1 })
         if (resultmess.length > 0) {
