@@ -42,10 +42,12 @@ function chk(id, message) {
             }
             else {
                 console.log('error')
+                return "ไม่ถูกต้อง"
             }
         }
         else {
             console.log('error')
+            return "ไม่ถูกต้อง"
         }
     }
     else if (message[10] == '#') {//วันที่#เงิน#หมายเหตุ
@@ -64,12 +66,14 @@ function chk(id, message) {
                     }
                     else {
                         console.log('error')
+                        return "ไม่ถูกต้อง"
                     }
                 }
             }
         }
         else {
             console.log('error')
+            return "ไม่ถูกต้อง"
         }
     }
     else if (message.search("delete") == 0) {
@@ -92,11 +96,13 @@ function chk(id, message) {
                     }
                     else {
                         console.log('error')
+                        return "ไม่ถูกต้อง"
                     }
                 }
             }
             else {
                 console.log('error')
+                return "ไม่ถูกต้อง"
             }
 
         }
@@ -106,6 +112,7 @@ function chk(id, message) {
         }
         else {
             console.log('error')
+            return "ไม่ถูกต้อง"
         }
     }
     else if (message.search("show") == 0) {
@@ -120,6 +127,9 @@ function chk(id, message) {
     }
     else if(message == "help"){
         return Module_show.showhelp()
+    }
+    else{
+        return "ไม่ถูกต้อง"
     }
 }
 
