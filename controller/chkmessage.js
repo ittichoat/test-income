@@ -38,7 +38,7 @@ function chk(id, message) {
             if (numbers.test(slicemes)) {//ตรวจสอบว่าใช่ตัวเลขหรือไม่
                 console.log(message.slice(n + 1))
                 console.log(slicemes)
-                Module_message.add1(id, slicemes, message.slice(n + 1))
+                return Module_message.add1(id, slicemes, message.slice(n + 1))
             }
             else {
                 console.log('error')
@@ -60,7 +60,7 @@ function chk(id, message) {
                         console.log(message.slice(0, 10))//วันที่
                         console.log(messagenotdate.slice(n + 1))//ข้อความ
                         console.log(slicemes)//บาท
-                        Module_message.add2(id, slicemes, messagenotdate.slice(n + 1), message.slice(0, 10))
+                        return Module_message.add2(id, slicemes, messagenotdate.slice(n + 1), message.slice(0, 10))
                     }
                     else {
                         console.log('error')
@@ -74,7 +74,7 @@ function chk(id, message) {
     }
     else if (message.search("delete") == 0) {
         if (message == "delete all") {
-            Module_message.delall(id)
+            return Module_message.delall(id)
             console.log(message)
         }
         else if (chkdate(message.slice(7, 17)) && message.match(/#/g) != null) {
@@ -88,7 +88,7 @@ function chk(id, message) {
                         console.log(message.slice(7, 17))//วันที่
                         console.log(messagenotdate.slice(n + 1))//ข้อความ
                         console.log(slicemes)//บาท
-                        Module_message.delsel(id, slicemes, messagenotdate.slice(n + 1), message.slice(7, 17))
+                        return Module_message.delsel(id, slicemes, messagenotdate.slice(n + 1), message.slice(7, 17))
                     }
                     else {
                         console.log('error')
@@ -102,7 +102,7 @@ function chk(id, message) {
         }
         else if (chkdate(message.slice(7, 17))) {
             console.log(message.slice(7, 17))
-            Module_message.deldate(id, message.slice(7, 17))
+            return Module_message.deldate(id, message.slice(7, 17))
         }
         else {
             console.log('error')
@@ -111,15 +111,15 @@ function chk(id, message) {
     else if (message.search("show") == 0) {
         if (message == "show all") {
             console.log('OK')
-            Module_show.showall(id)
+            return Module_show.showall(id)
         }
         else if (chkdate(message.slice(5, 15))) {
             console.log(message.slice(5, 15))
-            Module_show.showdate(id, message.slice(5, 15))
+            return Module_show.showdate(id, message.slice(5, 15))
         }
     }
     else if(message == "help"){
-        Module_show.showhelp()
+        return Module_show.showhelp()
     }
 }
 
