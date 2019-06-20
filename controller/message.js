@@ -12,11 +12,12 @@ async function add1(id, baht, text) {
                 text: text
             })
         }
-        Module_show.showdate(id, date)
         console.log('OK')
+        return Module_show.showdate(id, date)
     }
     else {
         console.log('error')
+        return "ไม่ถูกต้อง"
     }
 }
 async function add2(id, baht, text, date) {
@@ -30,12 +31,13 @@ async function add2(id, baht, text, date) {
                 baht: baht,
                 text: text
             })
-            Module_show.showdate(id, date)
             console.log('OK')
+            return Module_show.showdate(id, date)
         }
     }
     else {
         console.log('error')
+        return "ไม่ถูกต้อง"
     }
 }
 async function delall(id) {
@@ -45,9 +47,11 @@ async function delall(id) {
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
             await database.message.deleteMany({ uid: userid._id })
             console.log('OK')
+            return "เรียบร้อย"
         }
     } else {
         console.log('error')
+        return "ไม่ถูกต้อง"
     }
 }
 async function deldate(id, date) {
@@ -57,9 +61,11 @@ async function deldate(id, date) {
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
             await database.message.deleteMany({ uid: userid._id, date: date })
             console.log('OK')
+            return "เรียบร้อย"
         }
     } else {
         console.log('error')
+        return "ไม่ถูกต้อง"
     }
 }
 async function delsel(id, baht, text, date) {
@@ -69,9 +75,11 @@ async function delsel(id, baht, text, date) {
         if (userid._id && mongoose.Types.ObjectId.isValid(userid._id)) {
             await database.message.deleteOne({ uid: userid._id, date: date, baht: baht, text: text })
             console.log('OK')
+            return "เรียบร้อย"
         }
     } else {
         console.log('error')
+        return "ไม่ถูกต้อง"
     }
 }
 

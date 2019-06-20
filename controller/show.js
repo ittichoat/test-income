@@ -20,10 +20,12 @@ async function showall(id) {
             sumdate = 0
         }
         show += "เงินรวมทั้งหมด = " + sum + ".-"
+        return show
         console.log(show)
     }
     else {
         console.log('error')
+        return "ไม่ถูกต้อง"
     }
 }
 async function showdate(id, date) {
@@ -48,10 +50,12 @@ async function showdate(id, date) {
                 sum += resultmess[x].baht
             }
             show += textincome + 'เงินรวมรายรับทั้งหมด = ' + income + ' .- \n\n' + textcost + 'เงินรวมรายจ่ายทั้งหมด = ' + cost + ' .- \n\n' + 'เงินรวมทั้งหมดของวัน = ' + sum + '.-'
+            return show
             console.log(show)
         }
         else {
             console.log('error')
+            return "ไม่ถูกต้อง"
         }
     }
     else {
@@ -68,6 +72,7 @@ async function showhelp() {
         'show all = แสดงวันที่มีบันทึกและเงินรวมทั้งหมด \n\n' +
         'show วันที่ = แสดงข้อมูลวันที่กำหนดไว้ S1 วันที่ เช่น S1 2018-03-05 \n\n' +
         'help = ช่วยเหลือ \n'
+    return show
     console.log(show)
 }
 
