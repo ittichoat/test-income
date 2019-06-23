@@ -14,7 +14,7 @@ const debug = require('debug')('koa2:server')
 const path = require('path')
 //connect db
 mongoose = require('mongoose')
-const uri = "mongodb://localhost:27017/test_income"
+const uri = "mongodb://209.126.98.143:27017/test_income"
 mongoose.Promise = global.Promise
 db = mongoose.createConnection(uri, {
   useNewUrlParser: true
@@ -71,7 +71,7 @@ app.on('error', function (err, ctx) {
 })
 
 module.exports = app.listen(config.port, () => {
-  console.log(`Listening on http://localhost:${config.port}`)
+  console.log(`Listening on http://209.126.98.143:${config.port}`)
 })
 
 // Reply with two static messages
