@@ -13,7 +13,7 @@ const logger = require('koa-logger')
 const path = require('path')
 //connect db
 mongoose = require('mongoose')
-const uri = "mongodb://165.22.50.217:27015/test_income"
+const uri = "mongodb://165.22.50.217:27015/test-income"
 mongoose.Promise = global.Promise
 db = mongoose.createConnection(uri, {
   useNewUrlParser: true
@@ -84,11 +84,14 @@ app1.use(bodyParser.urlencoded({ extended: false }))
 app1.use(bodyParser.json())
 app1.post('/webhook', (req, res) => {
     let reply_token = req.body.events[0].replyToken
-    reply(reply_token)
+    let id = req.body.events[0].source.userId
+    let msg = req.body.events[0].type
+    reply(reply_token,id,msg)
+    console.log("post OK!!")
     res.sendStatus(200)
 })
 app1.listen(port1)
-function reply(reply_token) {
+function reply(reply_token,id,msg) {
     let headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer {d3Vir0Hz1Ox7ScvwGlwS41fGjGf2PFcbvNhbK09deE5uuqW+0HVNkxg5KfcIvEU/cWW3uS5zY5wPuWzYmO8cYzQ9S4REu6N0ZnCUQ9+pW0KBh6uiNwk1XfizQFa3fJr01krMCPPPXLqe/vDTqwejuAdB04t89/1O/w1cDnyilFU=}'
@@ -97,13 +100,10 @@ function reply(reply_token) {
         replyToken: reply_token,
         messages: [{
             type: 'text',
-            text: 'Hello'
-        },
-        {
-            type: 'text',
-            text: 'How are you?'
+            text: controller_chkmessage.chk(id,msg)
         }]
     })
+    console.log("reply OK!!")
     request.post({
         url: 'https://api.line.me/v2/bot/message/reply',
         headers: headers,
