@@ -48,11 +48,6 @@ const index = require('./routes/index')
 const users = require('./routes/users')
 
 
-// Set port
-app.listen(config.port, () => {
-  console.log(`Start port ${config.port}`)
-})
-
 // error handler
 onerror(app)
 
