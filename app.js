@@ -1,3 +1,43 @@
+// Reply with two static messages
+
+const express = require('express')
+const bodyParser = require('body-parser')
+const request = require('request')
+const app1 = express()
+const port1 = process.env.PORT || 4000
+app1.use(bodyParser.urlencoded({ extended: false }))
+app1.use(bodyParser.json())
+app1.post('/webhook', (req, res) => {
+    let reply_token = req.body.events[0].replyToken
+    reply(reply_token)
+    res.sendStatus(200)
+})
+app1.listen(port1)
+function reply(reply_token) {
+    let headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer {FOCbyzOwHT8FSvTMJZByu+8QFd0sVBAfDWmjH4PpbRUnwFKUpL4sSNHT3QkpAzXmcWW3uS5zY5wPuWzYmO8cYzQ9S4REu6N0ZnCUQ9+pW0I2hEF7gbIMH+gIF4nIRnrNC2+b0MkoGU8BWVRaoYzs/AdB04t89/1O/w1cDnyilFU=}'
+    }
+    let body = JSON.stringify({
+        replyToken: reply_token,
+        messages: [{
+            type: 'text',
+            text: 'Hello'
+        },
+        {
+            type: 'text',
+            text: 'How are you?'
+        }]
+    })
+    request.post({
+        url: 'https://api.line.me/v2/bot/message/reply',
+        headers: headers,
+        body: body
+    }, (err, res, body) => {
+        console.log('status = ' + res.statusCode);
+    });
+}
+
 const Koa = require('koa')
 const Router = require('koa-router')
 const app = new Koa()
@@ -79,43 +119,3 @@ module.exports = app.listen(config.port, () => {
 // const port1 = process.env.PORT || 4000
 // app1.post('/webhook', (req, res) => res.sendStatus(200))
 // app1.listen(port1)
-
-// Reply with two static messages
-
-const express = require('express')
-const bodyParser = require('body-parser')
-const request = require('request')
-const app1 = express()
-const port1 = process.env.PORT || 4000
-app1.use(bodyParser.urlencoded({ extended: false }))
-app1.use(bodyParser.json())
-app1.post('/webhook', (req, res) => {
-    let reply_token = req.body.events[0].replyToken
-    reply(reply_token)
-    res.sendStatus(200)
-})
-app1.listen(port1)
-function reply(reply_token) {
-    let headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer {FOCbyzOwHT8FSvTMJZByu+8QFd0sVBAfDWmjH4PpbRUnwFKUpL4sSNHT3QkpAzXmcWW3uS5zY5wPuWzYmO8cYzQ9S4REu6N0ZnCUQ9+pW0I2hEF7gbIMH+gIF4nIRnrNC2+b0MkoGU8BWVRaoYzs/AdB04t89/1O/w1cDnyilFU=}'
-    }
-    let body = JSON.stringify({
-        replyToken: reply_token,
-        messages: [{
-            type: 'text',
-            text: 'Hello'
-        },
-        {
-            type: 'text',
-            text: 'How are you?'
-        }]
-    })
-    request.post({
-        url: 'https://api.line.me/v2/bot/message/reply',
-        headers: headers,
-        body: body
-    }, (err, res, body) => {
-        console.log('status = ' + res.statusCode);
-    });
-}
