@@ -6,6 +6,14 @@ router.get('/', async (ctx, next) => {
   }
 })
 
+router.post('/', async(ctx,next) => {
+  let body = ctx.request.body
+  console.log(JSON.stringify(body))
+  ctx.body = {
+    code: 200
+  }
+})
+
 router.get('/welcome', async function (ctx, next) {
   ctx.state = {
     title: 'koa2 title'
@@ -29,5 +37,6 @@ router.post('/api/users/remove', controller_users.remove)
 //show
 router.get('/api/show/showall', controller_show.showall)
 router.get('/api/show/showdate', controller_show.showdate)
+
 
 module.exports = router
