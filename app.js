@@ -74,46 +74,48 @@ module.exports = app.listen(config.port, () => {
   console.log(`Listening on http://209.126.98.143:${config.port}`)
 })
 
+// const express = require('express')
+// const app1 = express()
+// const port1 = process.env.PORT || 4000
+// app1.post('/webhook', (req, res) => res.sendStatus(200))
+// app1.listen(port1)
+
+// Reply with two static messages
+
 const express = require('express')
+const bodyParser = require('body-parser')
+const request = require('request')
 const app1 = express()
 const port1 = process.env.PORT || 4000
-app1.post('/webhook', (req, res) => res.sendStatus(200))
+app1.use(bodyParser.urlencoded({ extended: false }))
+app1.use(bodyParser.json())
+app1.post('/webhook', (req, res) => {
+    let reply_token = req.body.events[0].replyToken
+    reply(reply_token)
+    res.sendStatus(200)
+})
 app1.listen(port1)
-
-// // Reply with two static messages
-
-// //const express = require('express')
-// const bodyParser = require('body-parser')
-// //const request = require('request')
-// //const app = express()
-// //const port = process.env.PORT || 4000
-// app.use(bodyParser.urlencoded({ extended: false }))
-// app.use(bodyParser.json())
-// app.post('/webhook', (req, res) => {
-//   let reply_token = req.body.events[0].replyToken
-//   let reply_id = req.body.events[0].source.userId
-//   let msg = req.body.events[0].message.text
-//   reply(reply_token, reply_id, msg)
-//   res.sendStatus(200)
-// })
-// app.listen(port)
-// function reply(reply_token, reply_id, msg) {
-//   let headers = {
-//     'Content-Type': 'application/json',
-//     'Authorization': 'Bearer {N6EXUggiLoQOVtrsE86Xl30F3NBmxmmOC//NsuzdKZKrqmwjVHBEJkIcoArZKpTKcWW3uS5zY5wPuWzYmO8cYzQ9S4REu6N0ZnCUQ9+pW0LDd0cY6GVuLljk4Sb7Ohc9pEyM6KI3aAjvc38ZWMP/ZgdB04t89/1O/w1cDnyilFU=}'
-//   }
-//   let body = JSON.stringify({
-//     replyToken: reply_token,
-//     messages: [{
-//       type: 'text',
-//       text: controller_chkmessage.chk(reply_id, msg)
-//     }]
-//   })
-//   request.post({
-//     url: 'https://api.line.me/v2/bot/message/reply',
-//     headers: headers,
-//     body: body
-//   }, (err, res, body) => {
-//     console.log('status = ' + res.statusCode);
-//   });
-// }
+function reply(reply_token) {
+    let headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer {FOCbyzOwHT8FSvTMJZByu+8QFd0sVBAfDWmjH4PpbRUnwFKUpL4sSNHT3QkpAzXmcWW3uS5zY5wPuWzYmO8cYzQ9S4REu6N0ZnCUQ9+pW0I2hEF7gbIMH+gIF4nIRnrNC2+b0MkoGU8BWVRaoYzs/AdB04t89/1O/w1cDnyilFU=}'
+    }
+    let body = JSON.stringify({
+        replyToken: reply_token,
+        messages: [{
+            type: 'text',
+            text: 'Hello'
+        },
+        {
+            type: 'text',
+            text: 'How are you?'
+        }]
+    })
+    request.post({
+        url: 'https://api.line.me/v2/bot/message/reply',
+        headers: headers,
+        body: body
+    }, (err, res, body) => {
+        console.log('status = ' + res.statusCode);
+    });
+}
