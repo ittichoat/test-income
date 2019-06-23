@@ -47,6 +47,11 @@ const config = require('./config')
 const index = require('./routes/index')
 const users = require('./routes/users')
 
+let port = process.env.PORT || 3000
+
+app.listen(port, () => {
+  console.log(`Start port ${port}`)
+});
 
 // error handler
 onerror(app)
