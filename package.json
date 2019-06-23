@@ -6,10 +6,6 @@
     "start": "nodemon app.js"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "debug": "^2.6.9",
-    "ejs": "~2.5.5",
-    "express": "^4.17.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.0",
     "koa-convert": "^1.2.0",
