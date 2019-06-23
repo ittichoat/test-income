@@ -16,6 +16,11 @@ db = mongoose.createConnection(uri, {
 
 database = require('./models/database')
 
+controller_users = require('./controller/users')
+controller_message = require('./controller/message')
+controller_show = require('./controller/show')
+controller_chkmessage = require('./controller/chkmessage')
+
 reply = function (reply_token, id, msg) {
   let headers = {
     'Content-Type': 'application/json',
@@ -37,11 +42,6 @@ reply = function (reply_token, id, msg) {
     console.log('status = ' + res.statusCode);
   });
 }
-
-controller_users = require('./controller/users')
-controller_message = require('./controller/message')
-controller_show = require('./controller/show')
-controller_chkmessage = require('./controller/chkmessage')
 
 const config = require('./config')
 const index = require('./routes/index')
@@ -84,4 +84,7 @@ app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
 
-module.exports = app
+module.exports = {
+  app,
+  reply
+}
