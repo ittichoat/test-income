@@ -1,12 +1,13 @@
 const router = require('koa-router')()
 
+
 router.get('/', async (ctx, next) => {
   ctx.body = {
     code: 200
   }
 })
 
-router.post('/', async(ctx,next) => {
+router.post('/webhook', async(ctx,next) => {
   let body = ctx.request.body
   console.log(JSON.stringify(body))
   ctx.body = {
