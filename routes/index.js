@@ -8,8 +8,20 @@ router.get('/', async (ctx, next) => {
 })
 
 router.post('/webhook', async(ctx,next) => {
-  let body = ctx.request.body
-  console.log(JSON.stringify(body))
+ let body = ctx.request.body
+  reply_token = JSON.stringify(body.events[0].replyToken)
+  id = JSON.stringify(body.events[0].source.userId)
+  msg = JSON.stringify(body.events[0].message.text)
+  type = JSON.stringify(body.events[0].type)
+  if(type.search("message") == 1){
+    await Module_app.reply(reply_token.slice(1, reply_token.length-1), id.slice(1, id.length-1), msg.slice(1, msg.length-1))
+  }
+  else if(type.search("unfollow") == 1){
+    await users.remove(id.slice(1, id.length-1))
+  }
+  else if(type.search("follow") == 1){
+    await users.create(id.slice(1, id.length-1))
+  }
   ctx.body = {
     code: 200
   }
